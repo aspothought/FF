@@ -1,7 +1,5 @@
 package com.aspothought.financialfreedom;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -24,12 +22,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-/**
- * Fragment used for managing interactions for and presentation of a navigation drawer.
- * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
- * design guidelines</a> for a complete explanation of the behaviors implemented here.
- */
-public class NavigationDrawerFragment extends Fragment {
+
+public class NavigationDrawerManager extends Fragment {
 
     /**
      * Remember the position of the selected item.
@@ -60,7 +54,7 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
-    public NavigationDrawerFragment() {
+    public NavigationDrawerManager() {
     }
 
     @Override
@@ -89,16 +83,16 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mDrawerListView = (ListView) inflater.inflate(
-                R.layout.fragment_navigation_drawer, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+        mDrawerListView = (ListView) inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectItem(position);
             }
         });
+
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
@@ -108,21 +102,19 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section2),
                         getString(R.string.title_section3),
                 }));
+
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+
         return mDrawerListView;
+
     }
 
     public boolean isDrawerOpen() {
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
     }
 
-    /**
-     * Users of this fragment must call this method to set up the navigation drawer interactions.
-     *
-     * @param fragmentId   The android:id of this fragment in its activity's layout.
-     * @param drawerLayout The DrawerLayout containing this fragment's UI.
-     */
     public void setUp(int fragmentId, DrawerLayout drawerLayout) {
+
         mFragmentContainerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
 
@@ -207,8 +199,6 @@ public class NavigationDrawerFragment extends Fragment {
         }
 
     }
-
-
 
     @Override
     public void onAttach(Activity activity) {
